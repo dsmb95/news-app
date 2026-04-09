@@ -14,6 +14,15 @@ function App() {
   const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
   useEffect(() => {
+    
+    console.log('API_KEY:', API_KEY); // Debug: see if it's loading
+  
+    if (!API_KEY) {
+      console.error('API_KEY is not set');
+      setLoading(false);
+      return;
+    }
+
     axios
       .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`)
       .then((response) => {
